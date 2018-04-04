@@ -4,12 +4,12 @@
 #
 Name     : perl-ExtUtils-InstallPaths
 Version  : 0.009
-Release  : 1
+Release  : 2
 URL      : http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/ExtUtils-InstallPaths-0.009.tar.gz
 Source0  : http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/ExtUtils-InstallPaths-0.009.tar.gz
 Summary  : 'Build.PL install path logic made easy'
 Group    : Development/Tools
-License  : Artistic-1.0-Perl
+License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-ExtUtils-InstallPaths-doc
 BuildRequires : perl(ExtUtils::Config)
 
