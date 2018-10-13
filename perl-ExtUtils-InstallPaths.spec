@@ -4,24 +4,34 @@
 #
 Name     : perl-ExtUtils-InstallPaths
 Version  : 0.012
-Release  : 6
+Release  : 7
 URL      : http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/ExtUtils-InstallPaths-0.012.tar.gz
 Source0  : http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/ExtUtils-InstallPaths-0.012.tar.gz
 Summary  : 'Build.PL install path logic made easy'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
-Requires: perl-ExtUtils-InstallPaths-man
+Requires: perl-ExtUtils-InstallPaths-license = %{version}-%{release}
+BuildRequires : buildreq-cpan
 BuildRequires : perl(ExtUtils::Config)
 
 %description
 No detailed description available
 
-%package man
-Summary: man components for the perl-ExtUtils-InstallPaths package.
+%package dev
+Summary: dev components for the perl-ExtUtils-InstallPaths package.
+Group: Development
+Provides: perl-ExtUtils-InstallPaths-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-ExtUtils-InstallPaths package.
+
+
+%package license
+Summary: license components for the perl-ExtUtils-InstallPaths package.
 Group: Default
 
-%description man
-man components for the perl-ExtUtils-InstallPaths package.
+%description license
+license components for the perl-ExtUtils-InstallPaths package.
 
 
 %prep
@@ -49,10 +59,12 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-ExtUtils-InstallPaths
+cp LICENSE %{buildroot}/usr/share/package-licenses/perl-ExtUtils-InstallPaths/LICENSE
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -61,8 +73,12 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/ExtUtils/InstallPaths.pm
+/usr/lib/perl5/vendor_perl/5.26.1/ExtUtils/InstallPaths.pm
 
-%files man
+%files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/ExtUtils::InstallPaths.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-ExtUtils-InstallPaths/LICENSE
