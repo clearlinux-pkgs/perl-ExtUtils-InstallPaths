@@ -4,13 +4,14 @@
 #
 Name     : perl-ExtUtils-InstallPaths
 Version  : 0.012
-Release  : 17
+Release  : 18
 URL      : http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/ExtUtils-InstallPaths-0.012.tar.gz
 Source0  : http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/ExtUtils-InstallPaths-0.012.tar.gz
-Summary  : ExtUtils::InstallPaths - Build.PL install path logic made easy
+Summary  : 'Build.PL install path logic made easy'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-ExtUtils-InstallPaths-license = %{version}-%{release}
+Requires: perl-ExtUtils-InstallPaths-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : perl(ExtUtils::Config)
 
@@ -35,14 +36,24 @@ Group: Default
 license components for the perl-ExtUtils-InstallPaths package.
 
 
+%package perl
+Summary: perl components for the perl-ExtUtils-InstallPaths package.
+Group: Default
+Requires: perl-ExtUtils-InstallPaths = %{version}-%{release}
+
+%description perl
+perl components for the perl-ExtUtils-InstallPaths package.
+
+
 %prep
 %setup -q -n ExtUtils-InstallPaths-0.012
+cd %{_builddir}/ExtUtils-InstallPaths-0.012
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -52,7 +63,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -61,7 +72,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-ExtUtils-InstallPaths
-cp LICENSE %{buildroot}/usr/share/package-licenses/perl-ExtUtils-InstallPaths/LICENSE
+cp %{_builddir}/ExtUtils-InstallPaths-0.012/LICENSE %{buildroot}/usr/share/package-licenses/perl-ExtUtils-InstallPaths/6b12919e33cacff5d00af9cb516b0c915c5daee9
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -74,7 +85,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/ExtUtils/InstallPaths.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -82,4 +92,8 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-ExtUtils-InstallPaths/LICENSE
+/usr/share/package-licenses/perl-ExtUtils-InstallPaths/6b12919e33cacff5d00af9cb516b0c915c5daee9
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/ExtUtils/InstallPaths.pm
