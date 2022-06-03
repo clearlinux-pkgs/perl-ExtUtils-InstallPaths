@@ -4,7 +4,7 @@
 #
 Name     : perl-ExtUtils-InstallPaths
 Version  : 0.012
-Release  : 27
+Release  : 28
 URL      : http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/ExtUtils-InstallPaths-0.012.tar.gz
 Source0  : http://search.cpan.org/CPAN/authors/id/L/LE/LEONT/ExtUtils-InstallPaths-0.012.tar.gz
 Summary  : 'Build.PL install path logic made easy'
@@ -96,4 +96,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.34.0/ExtUtils/InstallPaths.pm
+/usr/lib/perl5/*
