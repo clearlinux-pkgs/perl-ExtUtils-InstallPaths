@@ -7,7 +7,7 @@
 #
 Name     : perl-ExtUtils-InstallPaths
 Version  : 0.013
-Release  : 33
+Release  : 34
 URL      : https://cpan.metacpan.org/authors/id/L/LE/LEONT/ExtUtils-InstallPaths-0.013.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/L/LE/LEONT/ExtUtils-InstallPaths-0.013.tar.gz
 Summary  : 'Build.PL install path logic made easy'
